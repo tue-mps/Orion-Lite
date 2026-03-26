@@ -23,59 +23,6 @@ inference time.
 
 ---
 
-## Repository structure
-
-```
-Orion-Lite/
-├── mmcv/              # Orion's custom mmcv fork (vision backbone, model heads, losses)
-├── adzoo/             # Orion training/testing entry-points and configs
-│   └── orion/
-│       ├── train.py, test.py, apis/
-│       └── configs/   (base Orion configs)
-├── team_code/         # Bench2Drive driving agent (orion_b2d_agent_strict.py)
-├── setup.py           # Build mmcv C extensions: pip install -v -e . --no-deps
-├── requirements.txt   # All dependencies
-│
-├── data_collection/
-│   ├── README.md                   # How to collect distillation data
-│   └── save_tensors_snippet.py     # Patch for mmcv/models/detectors/orion.py
-│
-├── distill/
-│   ├── train_student.py                    # Basic distillation (MSE/KL/L1/Huber loss)
-│   ├── train_student_with_orion_loss.py    # Full distillation with planning losses
-│   ├── train_ablation_decoder_layers.py    # Multi-GPU ablation: 2/4/8/16 layers
-│   ├── student_model.py                    # OrionStudent: pure transformer decoder
-│   ├── student_model_with_orion_loss.py    # OrionMimicModel: decoder + VAE + planning losses
-│   ├── losses.py                           # Standalone planning losses (no mmcv dependency)
-│   ├── vae_utils.py                        # Standalone VAE modules (no mmcv dependency)
-│   ├── dataloader.py                       # NpzDistillDataset
-│   │
-│   └── results/
-│       ├── orion_student_no_mimic_loss/    # 6-layer decoder, no mimic loss
-│       ├── orion_student_with_mimic_loss/  # 6-layer decoder, with mimic (L1) loss
-│       ├── ablation_decoder_layers_no_mimic/
-│       │   ├── decoder2l/   decoder4l/   decoder8l/   decoder16l/
-│       └── ablation_decoder_layers_with_mimic/
-│           ├── decoder2l/   decoder4l/   decoder8l/   decoder16l/
-│
-└── eval/
-    ├── configs/
-    │   ├── base/                          # Full OrionStudentPlanner base configs
-    │   ├── orion_student_exp{7,8,9}_stage2_b2d_agent_eval.py
-    │   ├── orion_student_6l_{no,with}_mimic_b2d_agent_eval.py
-    │   └── orion_student_decoder{2,4,8,16}l_{no,with}_mimic_b2d_agent_eval.py
-    │
-    └── scripts/
-        ├── run_orion_student_exp9_multi_strict.sh
-        ├── run_orion_student_exp7_exp8_multi_strict.sh
-        ├── run_orion_student_decoder_ablation_multi_strict.sh
-        ├── run_orion_student_no_mimic_loss_multi_strict.sh
-        ├── run_orion_student_with_mimic_loss_multi_strict.sh
-        └── export_distill_ckpt.py         # Merge backbone + distill decoder → full ckpt
-```
-
----
-
 ## Step 1 – Collect distillation data
 
 See [data_collection/README.md](data_collection/README.md) for a detailed guide.
@@ -263,44 +210,6 @@ trajectory-ground-truth planning losses.
 | Huber | **0.75** | 0.70 |
 
 Huber gives the best open-loop L2, while L1 yields the best collision profile.
-
----
-
-## Distillation training losses
-
-### 6-layer decoder: mimic loss ablation
-
-| Run | Val loss (epoch 20) | Best val loss |
-|-----|---------------------|---------------|
-| no_mimic  (planning losses only) | 0.1562 | 0.1493 (ep 16) |
-| with_mimic (+ L1 feature mimic)  | 0.2895 | 0.2895 (ep 20) |
-
-> Note: the `total` loss is not directly comparable between no-mimic and
-> with-mimic runs because the mimic loss term is absent from the no-mimic total.
-
-### Decoder-depth ablation (no mimic loss, `first_try` runs)
-
-Training config: `hidden_dim=1024`, `num_heads=16`, `use_feature_mimic_loss=False`
-
-| Decoder layers | Best val loss |
-|----------------|---------------|
-| 2  | see `distill/results/ablation_decoder_layers_no_mimic/decoder2l/logs/train.log` |
-| 4  | see `distill/results/ablation_decoder_layers_no_mimic/decoder4l/logs/train.log` |
-| 8  | see `distill/results/ablation_decoder_layers_no_mimic/decoder8l/logs/train.log` |
-| 16 | see `distill/results/ablation_decoder_layers_no_mimic/decoder16l/logs/train.log` |
-
-### Decoder-depth ablation (with mimic loss, `ablation_layers_mimic_no_amp` runs)
-
-Training config: `hidden_dim=1024`, `num_heads=16`, `use_feature_mimic_loss=True`
-
-| Decoder layers | Best val loss (total) |
-|----------------|-----------------------|
-| 2  | 0.2992 (epoch 17) |
-| 4  | see logs |
-| 8  | see logs |
-| 16 | see logs |
-
-Full training logs available under `distill/results/ablation_decoder_layers_with_mimic/`.
 
 ---
 
