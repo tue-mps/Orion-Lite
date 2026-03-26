@@ -1,0 +1,50 @@
+__pycache__/
+*.py[cod]
+*.pth
+*.pt
+*.pth.tar
+*.egg-info/
+dist/
+build/
+.eggs/
+*.so
+*.dylib
+
+# Orion work dirs (checkpoints/training outputs, not source code)
+adzoo/orion/work_dirs/
+
+# Data
+distill_data/
+*.npz
+
+# Local checkpoints / model assets
+/ckpts/
+
+# Distillation outputs: keep run configs, ignore heavy artifacts
+/distill/results/**/checkpoints/
+/distill/results/**/logs/
+/distill/test_runs/
+/distill_data_test/
+
+# Exported eval checkpoints
+/eval/fused_ckpts/
+/eval/merged_ckpts/
+
+# Logs (keep structured results, ignore raw large logs if needed)
+*.log.gz
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Eval artifacts
+eval_bench2drive220_*/
+*_split_done.flag
+preflight_*.log
+/test/

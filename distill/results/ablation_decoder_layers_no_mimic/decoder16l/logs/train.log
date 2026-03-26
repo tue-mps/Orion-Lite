@@ -1,0 +1,109 @@
+2026-01-16 22:56:17,200 - INFO - Config: {'train_dir': '/mnt/adas7tb/jgu/Orion/distill/distill_data/train', 'val_dir': '/mnt/adas7tb/jgu/Orion/distill/distill_data/val', 'hidden_dim': 1024, 'num_heads': 16, 'dropout': 0.1, 'input_dim': 4096, 'output_dim': 4096, 'epochs': 20, 'batch_size': 64, 'val_batch_size': 32, 'lr': 5e-05, 'weight_decay': 0.0001, 'max_grad_norm': 1.0, 'use_feature_mimic_loss': False, 'with_bound_loss': True, 'use_col_loss': True, 'num_workers': 32, 'seed': 0, 'out_dir': None, 'run_name': 'first_try', 'orion_ckpt': '/mnt/adas7tb/jgu/Orion/ckpts/Orion.pth', 'save_every_epochs': 0, 'compile': False, 'layers': '2,4,8,16', 'gpus': '0,1,2,3', 'resume': 'auto', 'num_layers': 16, 'gpu': 3}
+2026-01-16 23:48:41,990 - INFO - Epoch 1 Train Loss: 1942011.8339
+2026-01-16 23:48:42,009 - INFO - Train Details: {'loss_feature_mimic': 0.8431913311879815, 'loss_plan_reg': 0.47371859800169014, 'loss_plan_bound': 0.002464989889825058, 'loss_plan_col': 0.08086084826570436, 'loss_vae_gen': 1942011.2830445434, 'total': 1942011.8338743756}
+2026-01-16 23:48:42,009 - INFO - Epoch 1 Train Loss: 112.8235
+2026-01-16 23:48:42,009 - INFO - Train Details: {'loss_feature_mimic': 0.7979323112305063, 'loss_plan_reg': 0.10506795749421599, 'loss_plan_bound': 0.0002791028177963459, 'loss_plan_col': 0.01944458187409834, 'loss_vae_gen': 112.6986692960861, 'total': 112.8234625084452}
+2026-01-16 23:48:42,009 - INFO - Epoch 1 Train Loss: 18238.4412
+2026-01-16 23:48:42,009 - INFO - Train Details: {'loss_feature_mimic': 0.831394488218858, 'loss_plan_reg': 0.4638191650741657, 'loss_plan_bound': 0.0016766807681067792, 'loss_plan_col': 0.08742997130852738, 'loss_vae_gen': 18237.88816636281, 'total': 18238.441160298913}
+2026-01-16 23:48:42,009 - INFO - Epoch 1 Train Loss: 193675.3254
+2026-01-16 23:48:42,009 - INFO - Train Details: {'loss_feature_mimic': 0.8833203267810714, 'loss_plan_reg': 0.48760505767504114, 'loss_plan_bound': 0.0016080434156783214, 'loss_plan_col': 0.0845789695145909, 'loss_vae_gen': 193674.7558714919, 'total': 193675.32544665557}
+2026-01-16 23:51:41,897 - INFO - Epoch 1 Val Loss: 0.4930
+2026-01-16 23:51:41,898 - INFO - Val Details: {'loss_feature_mimic': 0.8449899836668647, 'loss_plan_reg': 0.44161238058695473, 'loss_plan_bound': 0.00018905066975631618, 'loss_plan_col': 0.045476024970412254, 'loss_vae_gen': 0.005714034283083127, 'total': 0.4929914938615742}
+2026-01-16 23:51:57,020 - INFO - Saved best checkpoint
+2026-01-16 23:52:05,119 - INFO - Epoch 1 Val Loss: 0.1547
+2026-01-16 23:52:05,119 - INFO - Val Details: {'loss_feature_mimic': 0.7782435050034463, 'loss_plan_reg': 0.1380348370012937, 'loss_plan_bound': 0.00014745743030466214, 'loss_plan_col': 0.01635215408865483, 'loss_vae_gen': 0.00014978699256059833, 'total': 0.15468423574149842}
+2026-01-16 23:52:10,264 - INFO - Saved best checkpoint
+2026-01-16 23:52:15,500 - INFO - Epoch 1 Val Loss: 0.5256
+2026-01-16 23:52:15,500 - INFO - Val Details: {'loss_feature_mimic': 0.8216755400572037, 'loss_plan_reg': 0.44828961756164, 'loss_plan_bound': 0.0006458472966813387, 'loss_plan_col': 0.07450149130242228, 'loss_vae_gen': 0.0021711783831999485, 'total': 0.5256081401112668}
+2026-01-16 23:52:22,768 - INFO - Saved best checkpoint
+2026-01-16 23:52:29,605 - INFO - Epoch 1 Val Loss: 0.5352
+2026-01-16 23:52:29,606 - INFO - Val Details: {'loss_feature_mimic': 0.9498283986438837, 'loss_plan_reg': 0.4742505118956887, 'loss_plan_bound': 0.0005895635856320139, 'loss_plan_col': 0.06061453191665677, 'loss_vae_gen': -0.00026076246851920487, 'total': 0.5351938449979721}
+2026-01-16 23:52:40,591 - INFO - Saved best checkpoint
+2026-01-17 00:48:07,641 - INFO - Epoch 2 Train Loss: 0.5431
+2026-01-17 00:48:07,642 - INFO - Train Details: {'loss_feature_mimic': 0.8428061784174762, 'loss_plan_reg': 0.4575492562845443, 'loss_plan_bound': 0.0005491100592269387, 'loss_plan_col': 0.0792440933501056, 'loss_vae_gen': 0.005802907225563939, 'total': 0.5431453656779872}
+2026-01-17 00:48:07,642 - INFO - Epoch 2 Train Loss: 0.1023
+2026-01-17 00:48:07,643 - INFO - Train Details: {'loss_feature_mimic': 0.7569224791716541, 'loss_plan_reg': 0.08372687774515665, 'loss_plan_bound': 0.00011383592090327658, 'loss_plan_col': 0.01649684734650692, 'loss_vae_gen': 0.0019225885667494209, 'total': 0.10226014952291322}
+2026-01-17 00:48:07,643 - INFO - Epoch 2 Train Loss: 0.5615
+2026-01-17 00:48:07,643 - INFO - Train Details: {'loss_feature_mimic': 0.8095287505662159, 'loss_plan_reg': 0.4653811267462632, 'loss_plan_bound': 0.0025555566598614195, 'loss_plan_col': 0.09231528128467097, 'loss_vae_gen': 0.0012155002202360434, 'total': 0.5614674629632899}
+2026-01-17 00:48:07,643 - INFO - Epoch 2 Train Loss: 0.6142
+2026-01-17 00:48:07,643 - INFO - Train Details: {'loss_feature_mimic': 0.9122152073924631, 'loss_plan_reg': 0.514406363640471, 'loss_plan_bound': 0.0039463143690365125, 'loss_plan_col': 0.09418381591276467, 'loss_vae_gen': 0.0017087119758387016, 'total': 0.6142452041925414}
+2026-01-17 08:37:22,206 - [rank layer16_gpu3] Config: {'train_dir': '/mnt/adas7tb/jgu/Orion/distill/distill_data/train', 'val_dir': '/mnt/adas7tb/jgu/Orion/distill/distill_data/val', 'hidden_dim': 1024, 'num_heads': 16, 'dropout': 0.1, 'input_dim': 4096, 'output_dim': 4096, 'epochs': 20, 'batch_size': 64, 'val_batch_size': 32, 'lr': 5e-05, 'weight_decay': 0.0001, 'max_grad_norm': 1.0, 'use_feature_mimic_loss': False, 'with_bound_loss': True, 'use_col_loss': True, 'num_workers': 32, 'seed': 0, 'out_dir': None, 'run_name': 'first_try', 'orion_ckpt': '/mnt/adas7tb/jgu/Orion/ckpts/Orion.pth', 'save_every_epochs': 0, 'compile': False, 'layers': '2,4,8,16', 'gpus': '0,1,2,3', 'resume': 'auto', 'num_layers': 16, 'gpu': 3}
+2026-01-17 08:37:43,946 - [rank layer16_gpu3] Resumed from distill/runs_ablation_layers/first_try_decoder16l_gpu3/checkpoints/last.pt at epoch 1, step 3669
+2026-01-17 09:37:32,650 - [rank layer16_gpu3] Epoch 2 Train Loss: 4.3765
+2026-01-17 09:37:32,650 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.8048925021910543, 'loss_plan_reg': 0.13305527338355527, 'loss_plan_bound': 0.000593013900934687, 'loss_plan_col': 0.024506641619213832, 'loss_vae_gen': 4.2182976028230685, 'total': 4.376452551000724}
+2026-01-17 09:40:46,596 - [rank layer16_gpu3] Epoch 2 Val Loss: 0.1396
+2026-01-17 09:40:46,636 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7947360914841555, 'loss_plan_reg': 0.12476015639081459, 'loss_plan_bound': 0.00031645201202342636, 'loss_plan_col': 0.015983142369796064, 'loss_vae_gen': -0.0014290548768126755, 'total': 0.13963069601310765}
+2026-01-17 09:41:59,446 - [rank layer16_gpu3] Saved best checkpoint
+2026-01-17 10:40:33,529 - [rank layer16_gpu3] Epoch 3 Train Loss: 0.1193
+2026-01-17 10:40:33,529 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7811088252697891, 'loss_plan_reg': 0.09730978376816163, 'loss_plan_bound': 0.0002686585641549482, 'loss_plan_col': 0.01984067364503117, 'loss_vae_gen': 0.0018700599359715462, 'total': 0.11928917599182487}
+2026-01-17 10:44:35,760 - [rank layer16_gpu3] Epoch 3 Val Loss: 0.1448
+2026-01-17 10:44:35,761 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.785519278554845, 'loss_plan_reg': 0.12729482244505103, 'loss_plan_bound': 0.0004692086346094448, 'loss_plan_col': 0.017184160027927033, 'loss_vae_gen': -0.00012742443720896047, 'total': 0.1448207664329029}
+2026-01-17 11:41:41,935 - [rank layer16_gpu3] Epoch 4 Train Loss: 0.1076
+2026-01-17 11:41:41,935 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7745324885789949, 'loss_plan_reg': 0.08769202889185668, 'loss_plan_bound': 0.00017500167927567934, 'loss_plan_col': 0.01758633003131702, 'loss_vae_gen': 0.002124518063560313, 'total': 0.10757787881632792}
+2026-01-17 11:46:28,089 - [rank layer16_gpu3] Epoch 4 Val Loss: 0.1433
+2026-01-17 11:46:28,092 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.782063889235927, 'loss_plan_reg': 0.12648477889826762, 'loss_plan_bound': 0.00033785106423787046, 'loss_plan_col': 0.0155069731173577, 'loss_vae_gen': 0.0009722705428811381, 'total': 0.14330187356598825}
+2026-01-17 12:43:26,493 - [rank layer16_gpu3] Epoch 5 Train Loss: 0.1007
+2026-01-17 12:43:26,493 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.770750683313756, 'loss_plan_reg': 0.08190878058798179, 'loss_plan_bound': 0.00013430828751173803, 'loss_plan_col': 0.016807438977165252, 'loss_vae_gen': 0.001862870290054023, 'total': 0.10071339825121038}
+2026-01-17 12:47:25,919 - [rank layer16_gpu3] Epoch 5 Val Loss: 0.1511
+2026-01-17 12:47:25,920 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7783866453349144, 'loss_plan_reg': 0.1322089714873286, 'loss_plan_bound': 0.00020865586927704087, 'loss_plan_col': 0.01934139900074394, 'loss_vae_gen': -0.0006673758538286585, 'total': 0.15109165124149534}
+2026-01-17 13:44:25,355 - [rank layer16_gpu3] Epoch 6 Train Loss: 0.0960
+2026-01-17 13:44:25,355 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7668710726260749, 'loss_plan_reg': 0.0779361747465185, 'loss_plan_bound': 0.00012372685206615114, 'loss_plan_col': 0.01608488702566309, 'loss_vae_gen': 0.0018975619461745813, 'total': 0.09604235060876512}
+2026-01-17 13:49:11,270 - [rank layer16_gpu3] Epoch 6 Val Loss: 0.1507
+2026-01-17 13:49:11,277 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7699800242212348, 'loss_plan_reg': 0.13179090473764027, 'loss_plan_bound': 0.00015971408297593456, 'loss_plan_col': 0.019444879345326425, 'loss_vae_gen': -0.0007011875454475755, 'total': 0.15069431128589136}
+2026-01-17 14:46:08,980 - [rank layer16_gpu3] Epoch 7 Train Loss: 0.0921
+2026-01-17 14:46:08,980 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7625341291289851, 'loss_plan_reg': 0.07465541795907407, 'loss_plan_bound': 0.00011837098383563071, 'loss_plan_col': 0.015697832718755796, 'loss_vae_gen': 0.0016517794960599548, 'total': 0.09212340131142088}
+2026-01-17 14:50:21,642 - [rank layer16_gpu3] Epoch 7 Val Loss: 0.1440
+2026-01-17 14:50:21,643 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7701794629976934, 'loss_plan_reg': 0.1282487197706831, 'loss_plan_bound': 0.00036729708723609215, 'loss_plan_col': 0.01815254718298673, 'loss_vae_gen': -0.002728290182359498, 'total': 0.14404027346269624}
+2026-01-17 15:47:29,541 - [rank layer16_gpu3] Epoch 8 Train Loss: 0.0900
+2026-01-17 15:47:29,541 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7577816930574889, 'loss_plan_reg': 0.07232904930909474, 'loss_plan_bound': 0.000105411732580934, 'loss_plan_col': 0.015338565565819064, 'loss_vae_gen': 0.00222503904440575, 'total': 0.08999806574707495}
+2026-01-17 15:51:34,070 - [rank layer16_gpu3] Epoch 8 Val Loss: 0.1431
+2026-01-17 15:51:34,070 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7664085351618151, 'loss_plan_reg': 0.127995522982096, 'loss_plan_bound': 0.00033313231751731505, 'loss_plan_col': 0.016091929451664655, 'loss_vae_gen': -0.0012752837838228802, 'total': 0.1431453009584554}
+2026-01-17 16:48:39,794 - [rank layer16_gpu3] Epoch 9 Train Loss: 0.0864
+2026-01-17 16:48:39,794 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7556604904808768, 'loss_plan_reg': 0.07018021891352005, 'loss_plan_bound': 8.485047446521195e-05, 'loss_plan_col': 0.015282148296325312, 'loss_vae_gen': 0.0008143331747274652, 'total': 0.08636155082524619}
+2026-01-17 16:52:40,846 - [rank layer16_gpu3] Epoch 9 Val Loss: 0.1452
+2026-01-17 16:52:40,846 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7645640856310019, 'loss_plan_reg': 0.12903766741670153, 'loss_plan_bound': 0.00015483487471752334, 'loss_plan_col': 0.015079234741242635, 'loss_vae_gen': 0.0008981570722233328, 'total': 0.1451698948705843}
+2026-01-17 17:49:39,502 - [rank layer16_gpu3] Epoch 10 Train Loss: 0.0846
+2026-01-17 17:49:39,502 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7524783937669184, 'loss_plan_reg': 0.0680965343954762, 'loss_plan_bound': 6.932815313703487e-05, 'loss_plan_col': 0.014927955899616303, 'loss_vae_gen': 0.0014578955318183763, 'total': 0.08455171396980724}
+2026-01-17 17:53:46,529 - [rank layer16_gpu3] Epoch 10 Val Loss: 0.1418
+2026-01-17 17:53:46,533 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7609065384638874, 'loss_plan_reg': 0.12936299798977932, 'loss_plan_bound': 7.373818714273838e-05, 'loss_plan_col': 0.016635624765583366, 'loss_vae_gen': -0.004257879960826804, 'total': 0.14181448047413975}
+2026-01-17 18:50:48,233 - [rank layer16_gpu3] Epoch 11 Train Loss: 0.0823
+2026-01-17 18:50:48,233 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7488626580727006, 'loss_plan_reg': 0.0662286862929987, 'loss_plan_bound': 7.102542641492315e-05, 'loss_plan_col': 0.014855821908128739, 'loss_vae_gen': 0.0011046415724877637, 'total': 0.082260175298673}
+2026-01-17 18:54:48,939 - [rank layer16_gpu3] Epoch 11 Val Loss: 0.1498
+2026-01-17 18:54:48,939 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7566615450114681, 'loss_plan_reg': 0.12967037804499662, 'loss_plan_bound': 4.989573002753413e-05, 'loss_plan_col': 0.016184545813030807, 'loss_vae_gen': 0.0039389458905320215, 'total': 0.14984376633834753}
+2026-01-17 19:51:45,102 - [rank layer16_gpu3] Epoch 12 Train Loss: 0.0802
+2026-01-17 19:51:45,102 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7450362389988976, 'loss_plan_reg': 0.0645181289286388, 'loss_plan_bound': 6.069473294136626e-05, 'loss_plan_col': 0.014698182535598917, 'loss_vae_gen': 0.0009581846149555037, 'total': 0.08023519072713141}
+2026-01-17 19:55:47,711 - [rank layer16_gpu3] Epoch 12 Val Loss: 0.1481
+2026-01-17 19:55:47,754 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7536190433097897, 'loss_plan_reg': 0.13151432749107794, 'loss_plan_bound': 0.00021476960947686003, 'loss_plan_col': 0.016037858219032277, 'loss_vae_gen': 0.0002901206336488153, 'total': 0.1480570755625478}
+2026-01-17 20:52:47,206 - [rank layer16_gpu3] Epoch 13 Train Loss: 0.0799
+2026-01-17 20:52:47,206 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7436589027302374, 'loss_plan_reg': 0.06322494752321298, 'loss_plan_bound': 6.001265750032892e-05, 'loss_plan_col': 0.014471465748966144, 'loss_vae_gen': 0.0021100006407734975, 'total': 0.07986642662552534}
+2026-01-17 20:56:47,466 - [rank layer16_gpu3] Epoch 13 Val Loss: 0.1470
+2026-01-17 20:56:47,467 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7516319403921874, 'loss_plan_reg': 0.1327828355407516, 'loss_plan_bound': 0.00018540049608137244, 'loss_plan_col': 0.015829466121326994, 'loss_vae_gen': -0.001749966985678435, 'total': 0.14704773580815708}
+2026-01-17 21:53:52,468 - [rank layer16_gpu3] Epoch 14 Train Loss: 0.0767
+2026-01-17 21:53:52,468 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7402739569678818, 'loss_plan_reg': 0.06159270033402773, 'loss_plan_bound': 5.157053936225265e-05, 'loss_plan_col': 0.014099629465134576, 'loss_vae_gen': 0.0009931049205090686, 'total': 0.07673700525645957}
+2026-01-17 21:57:53,855 - [rank layer16_gpu3] Epoch 14 Val Loss: 0.1582
+2026-01-17 21:57:53,958 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7489103605027805, 'loss_plan_reg': 0.13880653824381986, 'loss_plan_bound': 0.00015863692364713496, 'loss_plan_col': 0.0199614221298663, 'loss_vae_gen': -0.0006817951241038981, 'total': 0.1582448032793201}
+2026-01-17 22:54:53,382 - [rank layer16_gpu3] Epoch 15 Train Loss: 3276.0303
+2026-01-17 22:54:53,382 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7378197107824521, 'loss_plan_reg': 0.06008699083988626, 'loss_plan_bound': 4.6893968882497235e-05, 'loss_plan_col': 0.014034696997052709, 'loss_vae_gen': 3275.9562271262143, 'total': 3276.030336661932}
+2026-01-17 22:58:52,705 - [rank layer16_gpu3] Epoch 15 Val Loss: 0.1465
+2026-01-17 22:58:52,705 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7470573082826382, 'loss_plan_reg': 0.13038013768846327, 'loss_plan_bound': 0.0, 'loss_plan_col': 0.017365809398217875, 'loss_vae_gen': -0.0012425705883419723, 'total': 0.14650337762075089}
+2026-01-17 23:55:47,992 - [rank layer16_gpu3] Epoch 16 Train Loss: 0.0743
+2026-01-17 23:55:47,992 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7373294025034111, 'loss_plan_reg': 0.058922377505113005, 'loss_plan_bound': 4.824586741485511e-05, 'loss_plan_col': 0.014094204554781288, 'loss_vae_gen': 0.001217161308913488, 'total': 0.07428198921323863}
+2026-01-17 23:59:51,003 - [rank layer16_gpu3] Epoch 16 Val Loss: 0.1446
+2026-01-17 23:59:51,059 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7455260777413993, 'loss_plan_reg': 0.13263861313356656, 'loss_plan_bound': 0.0002528799145001723, 'loss_plan_col': 0.015160501421315415, 'loss_vae_gen': -0.0034539626535037508, 'total': 0.1445980312318966}
+2026-01-18 00:56:45,265 - [rank layer16_gpu3] Epoch 17 Train Loss: 8548.4556
+2026-01-18 00:56:45,265 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7358680446097883, 'loss_plan_reg': 0.05804238314178114, 'loss_plan_bound': 4.276998240205716e-05, 'loss_plan_col': 0.014079166444922265, 'loss_vae_gen': 8548.3835417683, 'total': 8548.455600432157}
+2026-01-18 01:00:45,166 - [rank layer16_gpu3] Epoch 17 Val Loss: 0.1524
+2026-01-18 01:00:45,167 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7426794042016502, 'loss_plan_reg': 0.1364760644226004, 'loss_plan_bound': 0.00011869475124705759, 'loss_plan_col': 0.01767468794325641, 'loss_vae_gen': -0.0019050079195799673, 'total': 0.15236443895968538}
+2026-01-18 01:57:52,340 - [rank layer16_gpu3] Epoch 18 Train Loss: 631.9613
+2026-01-18 01:57:52,340 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7343875602046096, 'loss_plan_reg': 0.056889304373911855, 'loss_plan_bound': 5.371327084842331e-05, 'loss_plan_col': 0.014008760082876347, 'loss_vae_gen': 631.8903079465126, 'total': 631.9612588724144}
+2026-01-18 02:01:52,426 - [rank layer16_gpu3] Epoch 18 Val Loss: 0.1519
+2026-01-18 02:01:52,514 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7445891740316167, 'loss_plan_reg': 0.1347991528121853, 'loss_plan_bound': 4.053527624009553e-05, 'loss_plan_col': 0.018264412197128793, 'loss_vae_gen': -0.0011850816158210844, 'total': 0.1519190178229822}
+2026-01-18 02:58:45,738 - [rank layer16_gpu3] Epoch 19 Train Loss: 0.0710
+2026-01-18 02:58:45,738 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.7323666063697567, 'loss_plan_reg': 0.05556591615409804, 'loss_plan_bound': 3.3591125811163094e-05, 'loss_plan_col': 0.013857490293881263, 'loss_vae_gen': 0.0015355466643404688, 'total': 0.07099254417054723}
+2026-01-18 03:02:45,568 - [rank layer16_gpu3] Epoch 19 Val Loss: 0.1485
+2026-01-18 03:02:45,569 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7370934840152389, 'loss_plan_reg': 0.1349816464209648, 'loss_plan_bound': 5.815308215909468e-06, 'loss_plan_col': 0.01582653787535176, 'loss_vae_gen': -0.0023507195016243807, 'total': 0.14846327914879598}
+2026-01-18 03:59:49,245 - [rank layer16_gpu3] Epoch 20 Train Loss: 0.0700
+2026-01-18 03:59:49,245 - [rank layer16_gpu3] Train Details: {'loss_feature_mimic': 0.730392226392419, 'loss_plan_reg': 0.054497130926922835, 'loss_plan_bound': 4.9204230838057435e-05, 'loss_plan_col': 0.013831544700956938, 'loss_vae_gen': 0.001659149251551829, 'total': 0.0700370291068756}
+2026-01-18 04:03:54,281 - [rank layer16_gpu3] Epoch 20 Val Loss: 0.1526
+2026-01-18 04:03:54,372 - [rank layer16_gpu3] Val Details: {'loss_feature_mimic': 0.7374538841687533, 'loss_plan_reg': 0.13789201171972476, 'loss_plan_bound': 9.924932115913329e-05, 'loss_plan_col': 0.01723327154021924, 'loss_vae_gen': -0.002584626870299515, 'total': 0.15263990567592983}
+2026-01-18 04:04:50,234 - [rank layer16_gpu3] Training completed!

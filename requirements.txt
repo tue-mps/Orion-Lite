@@ -1,0 +1,87 @@
+# Full environment for Orion-Lite
+# Covers: student model training, data collection (Orion inference), and Bench2Drive eval.
+#
+# Install order:
+#   1. Install PyTorch matching your CUDA version first (example for CUDA 11.8):
+#        pip install torch==2.4.1+cu118 torchvision==0.19.1+cu118 --index-url https://download.pytorch.org/whl/cu118
+#      Or for CUDA 12.4 (newer GPUs):
+#        pip install torch==2.5.1+cu124 torchvision==0.20.1+cu124 --index-url https://download.pytorch.org/whl/cu124
+#   2. Build and install the mmcv C extensions:
+#        pip install -v -e . --no-deps
+#   3. Install the remaining dependencies:
+#        pip install -r requirements.txt
+
+# build / utils
+cython
+packaging
+six
+prettytable
+terminaltables
+tabulate
+psutil
+ninja
+
+# core python deps
+addict
+Pillow
+matplotlib
+scipy
+scikit-image
+scikit-learn
+networkx
+ipython
+opencv-python
+seaborn
+einops
+regex;sys_platform=='win32'
+
+# dataset / eval
+pycocotools; platform_system == "Linux"
+pycocotools-windows; platform_system == "Windows"
+nuscenes-devkit
+tensorboard
+cityscapesscripts
+imagecorruptions
+torchmetrics
+motmetrics==1.1.3
+
+# geometry / mapping
+open3d
+trimesh==2.35.39
+similaritymeasures
+shapely==1.8.5.post1
+transforms3d
+ephem
+
+# lidar / io
+laspy==2.5.0
+lazrs==0.5.3
+
+# planning
+casadi
+py-trees==0.8.3
+simple_watchdog_timer
+dictor
+
+# LLM / diffusion
+transformers==4.31.0
+peft==0.12.0
+diffusers==0.32.2
+SentencePiece
+
+# JIT / perf
+numpy==1.23.0
+numba==0.48.0
+
+# flash-attention (required by Orion attention modules)
+flash-attn>=2.6.3
+
+# tqdm (for training scripts)
+tqdm
+
+# pytest / lint
+pytest
+pytest-cov
+pytest-runner
+yapf==0.40.1
+flake8
