@@ -410,7 +410,7 @@ def main():
     ) if not args.distributed or args.rank == 0 else None
 
     script_dir = os.path.dirname(__file__)
-    out_dir = args.out_dir or os.path.join(script_dir, "runs")
+    out_dir = args.out_dir or os.path.join(script_dir, "results")
     run_name = args.run_name or datetime.now().strftime("%Y%m%d_%H%M%S")
     base_run_dir = os.path.join(out_dir, run_name)
     os.makedirs(base_run_dir, exist_ok=True)

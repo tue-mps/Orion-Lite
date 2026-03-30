@@ -1,0 +1,12 @@
+{
+  "run_name": "orion_lite",
+  "num_layers": 6,
+  "use_feature_mimic_loss": true,
+  "input_dim": 4096,
+  "hidden_dim": 1024,
+  "output_dim": 4096,
+  "num_heads": 16,
+  "dropout": 0.1,
+  "with_bound_loss": true,
+  "use_col_loss": true
+}

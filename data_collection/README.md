@@ -4,9 +4,9 @@
 
 Teacher inference data is collected by running the full Orion model on the
 training/validation split of the Bench2Drive dataset and saving intermediate
-tensors to `.npz` files.  Each file corresponds to one driving frame and
-contains the vision embeddings, the LLM planning token, and all ground-truth
-supervision signals used by the student training losses.
+tensors to `.npz` files. Each file corresponds to one driving frame and
+contains the vision embeddings, the LLM planning token, and all supervision
+signals used by the student training losses.
 
 ## File format
 
@@ -31,54 +31,24 @@ Files are named `data_{scene_token}_{frame_idx}.npz` and stored in separate
 
 ## How to collect
 
-### Step 1 – Patch `orion.py`
-
-Open `mmcv/models/detectors/orion.py` in this repo (it is at `mmcv/models/detectors/orion.py`)
-and locate the `simple_test_pts` method.  Find the line:
-
-```python
-current_states = ego_feature.unsqueeze(1)
-```
-
-Immediately after this line, uncomment (or insert) the save-tensors block from
-[`save_tensors_snippet.py`](save_tensors_snippet.py).  Set `save_dir` to your
-desired output path:
-
-```python
-save_dir = '/path/to/distill_data/train'   # for the training split
-# save_dir = '/path/to/distill_data/val'   # for the validation split
-```
-
-Additionally, uncomment the duplicate block near the `simple_test` entry-point
-(~line 1086) which adds an early-exit guard to skip already-saved frames:
-
-```python
-if os.path.exists(filename + ".npz"):
-    print(f"file already exist {filename}")
-    return [dict() for i in range(len(img_metas))]
-```
-
-### Step 2 – Run inference
-
-Use the standard Orion evaluation pipeline.  Run from the repo root:
+Run the collection script from the repo root:
 
 ```bash
-# collect training split
-python adzoo/orion/test.py \
-    adzoo/orion/configs/orion_b2d.py \
-    ckpts/Orion.pth \
-    --eval bbox \
-    --data-split train
-
-# collect validation split
-python adzoo/orion/test.py \
-    adzoo/orion/configs/orion_b2d.py \
-    ckpts/Orion.pth \
-    --eval bbox \
-    --data-split val
+bash data_collection/collect_distill_data.sh all
 ```
 
-### Step 3 – Verify
+Useful environment variables:
+
+```bash
+ORION_CKPT=/path/to/Orion.pth
+DATA_ROOT=/path/to/bench2drive
+INFO_ROOT=/path/to/infos
+OUT_DIR=/path/to/distill_data
+GPU=0
+NUM_WORKERS=4
+```
+
+## Verify
 
 ```python
 import numpy as np

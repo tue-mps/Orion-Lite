@@ -32,7 +32,7 @@ def parse_args():
     parser.add_argument(
         "--fused-ckpt",
         required=True,
-        help="Path to the fused OrionDistilled checkpoint.",
+        help="Path to the fused Orion-Lite checkpoint.",
     )
     parser.add_argument(
         "--mode",
@@ -139,8 +139,6 @@ def main():
             config_json,
             "--fused-ckpt",
             fused_ckpt,
-            "--style",
-            "fused_distilled",
             "--mode",
             args.mode,
             "--b2d-root",

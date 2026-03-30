@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Launch Orion-Lite open-loop evaluation for a distilled run."""
+"""Launch open-loop evaluation for a fused Orion-Lite checkpoint."""
 
 import argparse
 import json
@@ -7,7 +7,6 @@ import os
 import re
 import shlex
 import subprocess
-import sys
 from datetime import datetime
 
 from evaluate_distill_result import (
@@ -17,8 +16,6 @@ from evaluate_distill_result import (
     build_student_env,
     default_fused_ckpt_path,
     load_config,
-    resolve_distill_ckpt,
-    resolve_orion_ckpt,
     resolve_result_dir,
 )
 
@@ -30,11 +27,7 @@ DEFAULT_BASE_PORT = 29503
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description=(
-            "Open-loop evaluation wrapper for a fused OrionDistilled checkpoint. "
-            "For the public fused-checkpoint workflow, prefer "
-            "`evaluate_fused_checkpoint.py`."
-        )
+        description="Open-loop evaluation wrapper for a fused Orion-Lite checkpoint."
     )
     parser.add_argument(
         "--result-dir",
@@ -49,36 +42,15 @@ def parse_args():
     parser.add_argument(
         "--orion-root",
         default=DEFAULT_ORION_ROOT,
-        help="Original Orion repository root used for data defaults and fallback distilled checkpoints.",
-    )
-    parser.add_argument(
-        "--orion-ckpt",
-        default=None,
-        help="Base Orion checkpoint used to build the fused checkpoint. Defaults to Orion-Lite/ckpts/Orion.pth if present.",
-    )
-    parser.add_argument(
-        "--distill-ckpt",
-        default=None,
-        help="Override distilled checkpoint path directly.",
+        help="Original Orion repository root used for data defaults.",
     )
     parser.add_argument(
         "--fused-ckpt",
         default=None,
         help=(
-            "Path for the fused OrionDistilled checkpoint. "
-            "If the file already exists, it will be reused unless --rebuild-fused is set."
+            "Path to the fused Orion-Lite checkpoint. "
+            "Defaults to eval/fused_ckpts/<artifact>.pth when omitted."
         ),
-    )
-    parser.add_argument(
-        "--rebuild-fused",
-        action="store_true",
-        help="Force re-export of the fused checkpoint even if --fused-ckpt already exists.",
-    )
-    parser.add_argument(
-        "--which",
-        choices=["best", "last"],
-        default="best",
-        help="Which checkpoint under <result-dir>/checkpoints to use when --distill-ckpt is not set.",
     )
     parser.add_argument(
         "--config",
@@ -179,16 +151,11 @@ def _resolve_openloop_config(override, config):
     num_layers = int(config["num_layers"])
     configs_root = os.path.join(REPO_ROOT, "adzoo", "orion", "configs")
     if num_layers == 6:
-        path = os.path.join(configs_root, "orion_stage3_infer_distill_fused.py")
-    elif num_layers in {2, 4, 8, 16}:
-        path = os.path.join(
-            configs_root,
-            "ablation_layers",
-            "orion_stage3_infer_distill_ablation_fused.py",
-        )
+        path = os.path.join(REPO_ROOT, "configs", "orion_lite_openloop.py")
     else:
         raise ValueError(
-            f"Unsupported num_layers={num_layers}. Expected 6, 2, 4, 8, or 16."
+            f"Unsupported num_layers={num_layers}. "
+            "This simplified Orion-Lite repo keeps the 6-layer fused open-loop path only."
         )
 
     if not os.path.isfile(path):
@@ -206,41 +173,18 @@ def _build_cfg_options(data_root, info_root):
     return options
 
 
-def _run_and_log(cmd, cwd, env, stdout_path, dry_run=False):
-    print("$ " + " ".join(shlex.quote(c) for c in cmd))
-    if dry_run:
-        return
-
-    with open(stdout_path, "w", encoding="utf-8") as f:
-        proc = subprocess.run(
-            cmd,
-            cwd=cwd,
-            env=env,
-            stdout=f,
-            stderr=subprocess.STDOUT,
-            text=True,
-        )
-    if proc.returncode != 0:
-        raise RuntimeError(f"Open-loop evaluation failed. See log: {stdout_path}")
-
-
 def main():
     args = parse_args()
 
     result_dir = resolve_result_dir(args.result_dir) if args.result_dir else None
     result_config, config_path, result_dir = load_config(result_dir=result_dir, config_json=args.config_json)
     orion_root = os.path.abspath(args.orion_root)
-    orion_ckpt = resolve_orion_ckpt(args.orion_ckpt, orion_root)
     fused_ckpt = os.path.abspath(args.fused_ckpt or default_fused_ckpt_path(result_dir=result_dir, config_path=config_path))
-    reuse_existing_fused = os.path.isfile(fused_ckpt) and not args.rebuild_fused
-    distill_ckpt = None
-    if not reuse_existing_fused:
-        distill_ckpt = resolve_distill_ckpt(
-            result_dir,
-            args.distill_ckpt,
-            which=args.which,
-            config=result_config,
-            orion_root=orion_root,
+    if not os.path.isfile(fused_ckpt):
+        raise FileNotFoundError(
+            f"Fused checkpoint not found: {fused_ckpt}. "
+            "Export it first with eval/scripts/export_distill_fused_ckpt.py "
+            "or eval/scripts/export_all_distill_fused_last_ckpts.py."
         )
     openloop_config = _resolve_openloop_config(args.config, result_config)
 
@@ -253,14 +197,12 @@ def main():
     if not os.path.isfile(map_file):
         raise FileNotFoundError(f"Map info file not found: {map_file}")
 
-    os.makedirs(os.path.dirname(fused_ckpt), exist_ok=True)
-
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_tag = _slug(artifact_stem_for_paths(result_dir=result_dir, config_path=config_path))
     log_dir = os.path.join(os.path.abspath(args.log_root), timestamp)
     os.makedirs(log_dir, exist_ok=True)
-    stdout_path = os.path.join(log_dir, f"openloop_{run_tag}_{args.which}.txt")
-    summary_path = os.path.join(log_dir, f"summary_{run_tag}_{args.which}.json")
+    stdout_path = os.path.join(log_dir, f"openloop_{run_tag}.txt")
+    summary_path = os.path.join(log_dir, f"summary_{run_tag}.json")
 
     config_basename = os.path.splitext(os.path.basename(openloop_config))[0]
     test_output_base = os.path.join(REPO_ROOT, "test", config_basename)
@@ -271,7 +213,6 @@ def main():
 
     print(f"config_json    : {config_path}")
     print(f"fused_ckpt     : {fused_ckpt}")
-    print(f"reuse_fused    : {reuse_existing_fused}")
     print(f"openloop_config: {openloop_config}")
     print(f"data_root      : {data_root}")
     print(f"info_root      : {info_root}")
@@ -281,25 +222,6 @@ def main():
     print(f"log_dir        : {log_dir}")
     print(f"stdout_log     : {stdout_path}")
     print(f"summary_json   : {summary_path}")
-    if not reuse_existing_fused:
-        print(f"orion_ckpt     : {orion_ckpt}")
-        print(f"distill_ckpt   : {distill_ckpt}")
-
-    export_cmd = None
-    if reuse_existing_fused:
-        print(f"Using existing fused checkpoint: {fused_ckpt}")
-    else:
-        export_cmd = [
-            sys.executable,
-            os.path.join(REPO_ROOT, "eval", "scripts", "export_distill_fused_ckpt.py"),
-            "--orion-ckpt",
-            orion_ckpt,
-            "--distill-ckpt",
-            distill_ckpt,
-            "--out-ckpt",
-            fused_ckpt,
-        ]
-        _run_and_log(export_cmd, REPO_ROOT, os.environ.copy(), stdout_path, dry_run=args.dry_run)
 
     eval_cmd = [
         "bash",
@@ -315,14 +237,10 @@ def main():
     eval_env["PORT"] = str(args.base_port)
 
     if args.dry_run:
-        if reuse_existing_fused:
-            print(f"# using existing fused checkpoint: {fused_ckpt}")
         print("$ " + " ".join(shlex.quote(c) for c in eval_cmd))
         return
 
     with open(stdout_path, "a", encoding="utf-8") as f:
-        if export_cmd is not None:
-            f.write("$ " + " ".join(shlex.quote(c) for c in export_cmd) + "\n")
         f.write("$ " + " ".join(shlex.quote(c) for c in eval_cmd) + "\n")
         proc = subprocess.run(
             eval_cmd,
@@ -340,10 +258,7 @@ def main():
     summary = {
         "source_run_dir": result_dir,
         "result_config": config_path,
-        "distill_ckpt": distill_ckpt,
-        "orion_ckpt": orion_ckpt,
         "fused_ckpt": fused_ckpt,
-        "which": args.which,
         "openloop_config": openloop_config,
         "stdout_log": stdout_path,
         "test_output_dir": eval_output_dir,

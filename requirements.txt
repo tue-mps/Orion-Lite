@@ -50,6 +50,7 @@ open3d
 trimesh==2.35.39
 similaritymeasures
 shapely==1.8.5.post1
+pyquaternion
 transforms3d
 ephem
 
