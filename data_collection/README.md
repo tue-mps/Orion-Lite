@@ -62,7 +62,7 @@ print(d['planning_token'].shape)   # (1, 1, 4096)
 
 | Split | Frames | Approx. size |
 |-------|--------|--------------|
-| train | ~100k | ~150 GB |
-| val   | ~10k  | ~15 GB |
+| train | ~100k | 913 GB |
+| val   | ~10k  | 50 GB |
 
 Sizes depend on the number of detected agents and lanes per frame.

@@ -1,7 +1,7 @@
 <!-- # Orion-Lite: Distilling LLM Reasoning into Efficient Vision-Only Driving Models -->
 
 <div align="center">
-<h3>[CVPRW 26]Orion-Lite: Distilling LLM Reasoning into Efficient Vision-Only Driving Models</h3>
+<h3>[CVPRW 26] Orion-Lite: Distilling LLM Reasoning into Efficient Vision-Only Driving Models</h3>
 Jing Gu, Cavagnero, Niccolò, Dubbelman, Gijs<sup>†</sup>
 
 Eindhoven University of Technology, MPS Lab
