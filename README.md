@@ -25,8 +25,8 @@ The student decoder takes teacher visual queries as input and predicts the ego p
 
 ## Links
 
-- Paper:
-- Project page: [MPS-LAB](https://www.tue-mps.org/)
+- Paper: [Orion-Lite](https://arxiv.org/pdf/2604.08266v1)
+- Lab page: [MPS-LAB](https://www.tue-mps.org/)
 - Checkpoints: [Orion-Lite](https://huggingface.co/JG-GJ/Orion-Lite/tree/main/fused_ckpts)
 - Evaluation JSON: Orion-Lite/eval/eval_results
 
