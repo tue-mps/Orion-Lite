@@ -141,51 +141,21 @@ python eval/scripts/evaluate_fused_checkpoint.py \
 
 ### Main Bench2Drive220 Summary
 
-| Model | Closed-loop DS | Closed-loop SR | Efficiency | Comfortness | Open-loop Avg. L2 | Latency | Config | Checkpoint | Eval JSON |
-| :--- | ---: | ---: | ---: | ---: | ---: | ---: | :--- | :--- | :--- |
-| ORION (0.5B) | 72.9 | 45.8 | - | - | - | - |  |  |  |
-| ORION (7B Teacher) | 77.7 | 54.6 | 151.5 | 17.4 | 0.68 | 806 ms | [orion_stage3.py](adzoo/orion/configs/orion_stage3.py) |  |  |
-| Orion-Lite (0.1B) | **80.6** | **55.5** | **157.7** | 10.3 | 0.79 | **267 ms** |  |  |  |
+| Model | Closed-loop DS | Closed-loop SR | Efficiency | Comfortness | Open-loop Avg. L2 | Latency | Checkpoint | Eval JSON |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: | :--- | :--- |
+| ORION (0.5B) | 72.9 | 45.8 | - | - | - | - |  |  |
+| ORION (7B Teacher) | 77.7 | 54.6 | 151.5 | 17.4 | 0.68 | 806 ms | [ORION](https://github.com/xiaomi-mlab/Orion) |  |
+| Orion-Lite (0.1B) | **80.6** | **55.5** | **157.7** | 10.3 | 0.79 | **267 ms** | [Orion-Lite](https://huggingface.co/JG-GJ/Orion-Lite/tree/main/fused_ckpts) | [eval_results](eval/eval_results) |
 
 Compared with the 7B teacher, Orion-Lite improves Driving Score by `+2.9`, Success Rate by `+0.9`.
-
-### Ability Breakdown
-
-| Model | Merging | Overtaking | Emergency Brake | Give Way | Traffic Sign | Mean |
-| :--- | ---: | ---: | ---: | ---: | ---: | ---: |
-| ORION (0.5B) | 26.3 | 62.2 | 55.6 | 50.0 | 63.3 | 51.4 |
-| ORION (7B Teacher) | 25.0 | 71.1 | 78.3 | 30.0 | 69.2 | 54.7 |
-| Orion-Lite (0.1B) | **28.8** | **75.6** | **78.3** | **50.0** | **70.0** | **60.5** |
-
-### Supervision Ablation
-
-| Setting | Closed-loop DS | Closed-loop SR | Ability Mean |
-| :--- | ---: | ---: | ---: |
-| Trajectory GT only | 73.9 | 50.0 | 47.7 |
-| Feature mimic only | 76.0 | 50.7 | 53.3 |
-| Feature mimic + trajectory GT | **80.6** | **55.5** | **60.5** |
-
-### Training Duration Comparison
-
-| Setting | Epochs | Closed-loop DS | Closed-loop SR | Ability Mean |
-| :--- | ---: | ---: | ---: | ---: |
-| ORION | 18 (default) | 77.7 | 54.6 | 54.7 |
-| ORION | 24 | 77.1 | 50.7 | 52.0 |
-| Orion-Lite | 20 | **80.6** | **55.5** | **60.5** |
-
-### Distillation Loss Ablation
-
-| Distillation loss | Open-loop Avg. L2 | Collision Avg. |
-| :--- | ---: | ---: |
-| L1 | 0.79 | **0.54** |
-| L2 | 0.79 | 0.60 |
-| KL | 0.79 | 0.63 |
-| Huber | **0.75** | 0.70 |
-
-Huber gives the best open-loop L2, while L1 yields the best collision profile in this ablation.
 
 ## Citation
 
 ```bibtex
-
+@article{gu2026orion,
+  title={Orion-Lite: Distilling LLM Reasoning into Efficient Vision-Only Driving Models},
+  author={Gu, Jing and Cavagnero, Niccol{\`o} and Dubbelman, Gijs},
+  journal={arXiv preprint arXiv:2604.08266},
+  year={2026}
+}
 ```
