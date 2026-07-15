@@ -48,3 +48,4 @@ eval_bench2drive220_*/
 *_split_done.flag
 preflight_*.log
 /test/
+eval/fused_ckpts/*.pth

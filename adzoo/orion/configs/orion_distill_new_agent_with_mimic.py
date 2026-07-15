@@ -325,12 +325,7 @@ test_pipeline = [
     dict(type='ResizeMultiview3D', img_scale=(640, 640), keep_ratio=False, multiscale_mode='value'),
     dict(type="NormalizeMultiviewImage", **img_norm_cfg),
     dict(type="PadMultiViewImage", size_divisor=32),
-    dict(type='LoadAnnoatationCriticalVQATest', 
-         load_type=["critical_qa"],
-         tokenizer=llm_path, 
-         use_gen_token=use_gen_token,
-         max_length=2048,
-         desc_qa=False),
+    # Removed LoadAnnoatationCriticalVQATest - no longer needed without LLM
     dict(
         type='MultiScaleFlipAug3D',
         img_scale=(1333, 800),
@@ -344,7 +339,7 @@ test_pipeline = [
                 with_label=False),
             dict(
                 type='CustomCollect3D',\
-                keys=['gt_bboxes_3d', 'gt_labels_3d', 'img', 'ego_his_trajs','input_ids','gt_attr_labels', 'ego_fut_trajs', 'ego_fut_masks','ego_fut_cmd', 'ego_lcf_feat','vlm_labels','can_bus','fut_valid_flag']+collect_keys,
+                keys=['gt_bboxes_3d', 'gt_labels_3d', 'img', 'ego_his_trajs','gt_attr_labels', 'ego_fut_trajs', 'ego_fut_masks','ego_fut_cmd', 'ego_lcf_feat','can_bus','fut_valid_flag']+collect_keys,  # Removed input_ids, vlm_labels - no longer needed without LLM
             )]
     )
 ]
@@ -355,12 +350,7 @@ inference_only_pipeline = [
     dict(type='ResizeMultiview3D', img_scale=(640, 640), keep_ratio=False, multiscale_mode='value'),
     dict(type="NormalizeMultiviewImage", **img_norm_cfg),
     dict(type="PadMultiViewImage", size_divisor=32),
-    dict(type='LoadAnnoatationCriticalVQATest', 
-         load_type=["critical_qa"],
-         tokenizer=llm_path, 
-         use_gen_token=use_gen_token,
-         max_length=2048,
-         desc_qa=False),
+    # Removed LoadAnnoatationCriticalVQATest - no longer needed without LLM
 
     dict(
         type='MultiScaleFlipAug3D',
@@ -374,7 +364,7 @@ inference_only_pipeline = [
                 class_names=class_names,
                 with_label=False),
             dict(type='CustomCollect3D',\
-                keys=['img','input_ids','ego_fut_cmd', 'vlm_labels','can_bus']+collect_keys,
+                keys=['img','ego_fut_cmd', 'can_bus']+collect_keys,  # Removed input_ids, vlm_labels - no longer needed without LLM
                 )]
     )
 ]
